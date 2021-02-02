@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Color Game</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body onload="newGame()">
+    <div id="header">
+      <h2>The Great</h2>
+      <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
+      <h2>Guessing Game</h2>
+      <div>The number of tries: <div id="c">0</div></div>
+    </div>
+    <div id="container">
+      <div class="tile" id="1"></div>
+      <div class="tile" id="2"></div>
+      <div class="tile" id="3"></div>
+      <div class="tile" id="4"></div>
+      <div class="tile" id="5"></div>
+      <div class="tile" id="6"></div>
+      <button type="button" id="button">New Game </button>
+    </div>
+
+
+
+
+    <script>
+      var array=["1","2","3","4","5","6"]
+      var z=array.map(function(i){return document.getElementById(i);});
+      var x;
+      var c=0;
+      var correctColor;
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function newGame() {
+        for(let i=0;i<6;i++)
+        z[i].style.background = getRandomColor();
+
+        x = Math.floor(Math.random() * 6 + 1);
+
+                correctColor = z[x-1].style.background;
+
+               /* console.log(x);
+               console.log(correctColor); */
+
+               document.getElementById("header-clue").innerHTML = correctColor;
+             }
+       for(let i=0;i<6;i++){
+             z[i].addEventListener("click", function () {
+               if (z[i].style.background == correctColor) {
+                 for(let i=0;i<6;i++)
+                 z[i].style.background = correctColor;
+                 document.getElementById("header").style.background = correctColor;
+               } else {c+=1;
+                 document.getElementById("c").innerHTML = c;
+                 z[i].style.background = "black";
+               }
+             });
+
+             }
+               button.addEventListener("click",function(){
+               c=0;
+              document.getElementById("c").innerHTML = 0;
+           newGame();});
+           </script>
+         </body>
+       </html>
